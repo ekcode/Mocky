@@ -37,7 +37,7 @@ object MongoRepository extends IRepository {
   }
 
   def save(mock: Mocker): Future[String] = {
-    val metadata = Metadata(mock.status, mock.charset, mock.headers, Repository.version)
+    val metadata = Metadata(mock.customPath, mock.status, mock.charset, mock.headers, Repository.version)
     val mockResponse = MockResponse(encodeBody(mock.body), metadata)
 
     Json.toJson(mockResponse)

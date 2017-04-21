@@ -10,6 +10,6 @@ GET     /lang/:lang                 controllers.Application.setLang(lang)
 GET     /referentials/http.js       controllers.Js.http
 GET     /referentials/i18n.js       controllers.Js.i18n
 
-GET     /$v<[a-z0-9]+>/$id<[a-z0-9]+> controllers.Application.get(id, v)
+GET     /$v<[a-z0-9]+>              controllers.Application.get(v)
 
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

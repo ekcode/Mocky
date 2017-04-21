@@ -22,8 +22,9 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
       Ok(views.html.index(Mocker.formMocker))
   }
 
-  def get(id: String, version: String) = Action.async {
+  def get(version: String) = Action.async { implicit request =>
     val repo = Repository(version)
+    val id = request.path.replace(s"/$version/", "")
     repo.getMockFromId(id).map { mock =>
       Status(mock.metadata.status)(repo.decodeBody(mock.content, mock.metadata.charset))
         .withHeaders(mock.metadata.headers.toSeq: _*)
@@ -35,7 +36,7 @@ class Application @Inject()(val messagesApi: MessagesApi) extends Controller wit
       error => Future.successful(BadRequest(views.html.index(error))),
       mock =>
         Repository.current.save(mock).map(id =>
-          Ok(Json.obj("url" -> routes.Application.get(id, Repository.version).absoluteURL(false)))
+          Ok(Json.obj("url" -> s"${Repository.version}/${id}"))
         ).fallbackTo(defaultError)
 
     )

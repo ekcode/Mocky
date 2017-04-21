@@ -12,6 +12,7 @@ alert.gist=private gist
 alert.linkReady=Your link is ready:
 
 form.legend=Generate your custom response
+form.customPath=Custom Path (Optional)
 form.code=Status Code
 form.location=Location
 form.contentType=Content Type

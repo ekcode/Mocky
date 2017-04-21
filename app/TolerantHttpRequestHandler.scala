@@ -21,7 +21,7 @@ class TolerantHttpRequestHandler @Inject() (
   override def routeRequest(request: RequestHeader) = {
     super.routeRequest(request).orElse {
       request.path match {
-        case RegexMock(version, id) => Some(new _root_.controllers.Application(messagesApi).get(id, version))
+        case RegexMock(version, id) => Some(new _root_.controllers.Application(messagesApi).get(version))
         case _ => None
       }
     }

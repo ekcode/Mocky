@@ -3,6 +3,7 @@ package models
 import play.api.libs.json._
 
 case class Metadata(
+  customPath: Option[String],
   status: Int,
   charset: String,
   headers: Map[String, String],

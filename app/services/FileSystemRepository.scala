@@ -18,17 +18,18 @@ object FileSystemRepository extends IRepository {
 
   def getMockFromId(id: String): Future[MockResponse] = {
     Future {
-      val fileContent = Source.fromFile(s"$outputDirectory/$id").mkString
+      val decId = id.replaceAll("/", "__SLASH__")
+      val fileContent = Source.fromFile(s"$outputDirectory/$decId").mkString
       Json.parse(fileContent).as[MockResponse]
     }
   }
 
   def save(mock: Mocker): Future[String] = {
     Future {
-      val metadata = Metadata(mock.status, mock.charset, mock.headers, Repository.version)
+      val metadata = Metadata(mock.customPath, mock.status, mock.charset, mock.headers, Repository.version)
       val mockResponse = MockResponse(encodeBody(mock.body), metadata)
-
-      val id = UUID.randomUUID().toString().replaceAll("-", "")
+      
+      val id = mock.customPath.getOrElse(UUID.randomUUID().toString().replaceAll("-", "")).replaceAll("^/", "").replaceAll("/", "__SLASH__");
       new File(outputDirectory).mkdirs()
       val file = new PrintWriter(s"$outputDirectory/$id")
       try {
@@ -37,7 +38,7 @@ object FileSystemRepository extends IRepository {
         file.close
       }
 
-      id
+      id.replaceAll("__SLASH__", "/")
     }
   }
 

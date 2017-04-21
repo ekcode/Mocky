@@ -37,6 +37,7 @@ object GithubRepository extends IRepository {
       files = Map(
         "content" -> GistFile(encodeBody(mocker.body)),
         "metadata" -> GistFile(Json.stringify(Json.toJson(Metadata(
+          mocker.customPath,
           mocker.status,
           mocker.charset,
           mocker.headers,

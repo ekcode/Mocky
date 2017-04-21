@@ -12,6 +12,7 @@ import models.MockResponse._
  * Map client Form data
  */
 case class Mocker(
+  customPath: Option[String],
   status: Int,
   contentType: String,
   charset: String,
@@ -40,6 +41,7 @@ object Mocker {
 
   val formMocker = Form(
     mapping(
+      "customPath"  -> optional(text),
       "statuscode"  -> number.verifying(min(0), max(9999)),
       "contenttype" -> nonEmptyText,
       "charset"     -> nonEmptyText,
