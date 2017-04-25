@@ -5,6 +5,13 @@ Mocky is a simple app which allows to generate custom HTTP responses. <br />
 It's helpful when you have to request a build-in-progress WS, when you want to mock the backend response in a singleapp, 
 or when you want to test your WS client.
 
+## Compare upstream branch of mocky
+This branch allows using custom url.
+It's only available on fs mode.
+
+Gist or mongodb mode, custom url option is not affected so, just generate random string url.
+
+
 ## Is Mocky online?
 
 Yes, Mocky is online, free and unlimited!
