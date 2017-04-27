@@ -16,7 +16,7 @@ class TolerantHttpRequestHandler @Inject() (
     extends DefaultHttpRequestHandler(router, errorHandler, configuration, filters) {
 
   // Authorize url with any data AFTER the version/id
-  private val RegexMock = """/([a-zA-Z0-9]+)/([a-z0-9]+).*""".r
+  private val RegexMock = """/([a-zA-Z0-9]+)/([a-zA-Z0-9]+).*""".r
       
   override def routeRequest(request: RequestHeader) = {
     super.routeRequest(request).orElse {
